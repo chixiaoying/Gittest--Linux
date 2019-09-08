@@ -55,7 +55,7 @@ int main()
 
 
 	struct d d1;
-	d1.name = {'D'};
+	//d1.name = {'D'};   //init array just can do it inturn or with strcmp(string)
 	d1.grade = 100;
 	d1.str = "aliyun";
 
