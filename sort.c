@@ -13,6 +13,8 @@ void quick(int left,int right);
 int heap();
 void print(int b[100],int n );
 void swap(int *a,int *b);
+void merging(int *list1,int list1_size,int *list2,int list2_size);
+void MergeSort(int k[],int n);
 #define printall()  print(p,len)
 void circulation();
 
@@ -24,7 +26,7 @@ int main()
 	int c=0;
 	while(c<1  || c>10)
 	{
-		printf("please choose the methord of the sort:\n1:bubble  2: insort  3:choose   4:shell   5:quick\n");
+		printf("please choose the methord of the sort:\n1:bubble  2: insort  3:choose   4:shell   5:quick  6:merge\n");
 		scanf("%d",&c);									
 		switch(c)
 		{
@@ -38,6 +40,7 @@ int main()
 			break;
 		case 5: quick(0,len-1);
 			break;
+		case 6:MergeSort(a,len);
 		default: printf("error");
 		}
 	}
@@ -214,6 +217,57 @@ void quick(int left,int right)
 }
   
 
+void merging(int *list1,int list1_size,int *list2,int list2_size)  
+{  
+    int i,j,k,m;  
+    i = j = k = 0;  
+      
+    int temp[len];  
+      
+    while(i<list1_size&&j<list2_size)  
+    {  
+        if(list1[i] < list2[j])  
+        {  
+            temp[k++] = list1[i++];  
+        }  
+        else   
+        {  
+            temp[k++] = list2[j++];  
+        }  
+    }  
+    //如果有剩下的，那么说明就是它是比前面的数组都大的，直接加入就可以了  
+    while(i<list1_size)  
+    {  
+        temp[k++] = list1[i++];  
+    }  
+    while(j<list2_size)  
+    {  
+        temp[k++] =  list2[j++];  
+    }  
+      
+    for(m=0; m<(list1_size + list2_size);m++)  
+    {  
+        list1[m] = temp[m];  
+    }  
+}  
+void MergeSort(int k[],int n)  
+{  
+      
+    if(n>1)  
+    {  
+        int *list1 = k;         //定义一个指针变量，指向数组k的地址  
+        int list1_size = n/2;   //数组的长度分为本来数组长度的一半  
+        int *list2 = k +n/2;    //定义另外一个指针变量，指向数组k+n/2的地址  
+        int list2_size = n - list1_size;//长度为刚才总的减去刚才分去那一半  
+          
+        MergeSort(list1,list1_size);    //调用数组本身，相当与递归，  
+        MergeSort(list2,list2_size);    //调用数组本身，相当与递归  
+        merging(list1,list1_size,list2,list2_size);  
+    }  
+      
+      
+      
+}  
 
 
 
